@@ -25,12 +25,14 @@ class _PrincipalViewState extends State<PrincipalView> {
   Widget build(BuildContext context) {
     getSize();
     return Scaffold(
-      body: SizedBox(
-        width: width,
-        child: Column(
-          children: [
-            historias(),
-          ],
+      body: FittedBox(
+        child: SizedBox(
+          width: width,
+          child: Column(
+            children: [
+              historias(),
+            ],
+          ),
         ),
       ),
     );
@@ -57,7 +59,7 @@ class _PrincipalViewState extends State<PrincipalView> {
               print('historia $index');
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0,),
+              padding: const EdgeInsets.symmetric(horizontal: 12,),
               child: SizedBox(
                 width: 80,
                 child: Column(
