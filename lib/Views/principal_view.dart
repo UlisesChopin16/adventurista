@@ -39,13 +39,22 @@ class _PrincipalViewState extends State<PrincipalView> {
         fit: BoxFit.contain,
         child: SizedBox(
           width: width,
-          height: height -170,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              historias(),
-              publicaciones(),
+          height: height - 66,
+          child: CustomScrollView(
+            slivers: [
+              const SliverAppBar(
+                title: Text('Adventurista'),
+                pinned: true,
+              ),
+              SliverToBoxAdapter(
+                child: historias(),
+              ),
+              SliverList.builder(
+                itemCount: 5,
+                itemBuilder: (context, index) {
+                  return publicaciones(index: index);
+                }
+              ),
             ],
           ),
         ),
@@ -91,7 +100,7 @@ class _PrincipalViewState extends State<PrincipalView> {
               });
             },
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 12,),
+              padding: const EdgeInsets.symmetric(horizontal: 10,),
               child: SizedBox(
                 width: 80,
                 child: Column(
@@ -148,54 +157,44 @@ class _PrincipalViewState extends State<PrincipalView> {
   }
 
 
-  publicaciones(){
-    return Expanded(
-      flex: 2,
-      child: Padding(
-        padding: const EdgeInsets.only(top: 5.0),
-        child: ListView.builder(
-          itemCount: 5,
-          itemBuilder: (context,index) {
-            return Container(
-              color: Colors.white,
+  publicaciones({required int index}){
+    
+    return Container(
+      color: Colors.white,
+      width: width,
+      height: 550,
+      child: Column(
+        children: [
+          partePerfil(index: index),
+          Expanded(
+            child: Container(
               width: width,
-              height: 550,
-              child: Column(
-                children: [
-                  partePerfil(index: index),
-                  Expanded(
-                    child: Container(
-                      width: width,
-                      decoration: BoxDecoration(
-                        color: Colors.grey[300],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Container(
-                          decoration:const  BoxDecoration(
-                            image: DecorationImage(
-                              image: AssetImage('assets/images/imagen_logo.jpg'),
-                              fit: BoxFit.contain
-                            )
-                          ),
-                        ),
-                      ),
-                    ),
+              decoration: BoxDecoration(
+                color: Colors.grey[300],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(0.0),
+                child: Container(
+                  decoration:const  BoxDecoration(
+                    image: DecorationImage(
+                      image: AssetImage('assets/images/imagen_logo.jpg'),
+                      fit: BoxFit.contain
+                    )
                   ),
-                  parteLikeYComenarios(index: index),
-                  const SizedBox(height: 20,)
-                ],
-              )
-            );
-          }
-        ),
-      ),
+                ),
+              ),
+            ),
+          ),
+          parteLikeYComenarios(index: index),
+          const SizedBox(height: 20,)
+        ],
+      )
     );
   }
 
   partePerfil({required int index}){
     return Container(
-      height: 50,
+      height: 60,
       width: width,
       decoration: const BoxDecoration(
         color: Colors.white,

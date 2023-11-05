@@ -1,8 +1,10 @@
 import 'package:adventurista/Components/text_field_adventure.dart';
 import 'package:adventurista/Constants/colors.dart';
+import 'package:adventurista/Views/ingreso/registro_view.dart';
 import 'package:adventurista/Views/menu_view.dart';
 import 'package:flutter/material.dart';
 import 'package:animate_do/animate_do.dart';
+import 'package:gap/gap.dart';
 
 class LoginView extends StatefulWidget {
   const LoginView({ Key? key }) : super(key: key);
@@ -59,7 +61,7 @@ class _LoginViewState extends State<LoginView> {
   }
 
   String? validator(String? value){
-    if(value == null || value.isEmpty){
+    if(value == null || value.trim().isEmpty){
       return 'El campo no puede estar vacio';
     }
     return null;
@@ -77,11 +79,19 @@ class _LoginViewState extends State<LoginView> {
       });
     });
 
-    await Future.delayed(const Duration(milliseconds: 500), () {
+    await Future.delayed(const Duration(milliseconds: 100), () {
       setState(() {
         contenidoOpaco = 1.0;
       });
     });
+  }
+
+  metodoLanzarRegistro(){
+    Navigator.of(context).push(
+      MaterialPageRoute(
+        builder: (context) => const RegistroView(),
+      )
+    );
   }
 
   @override
@@ -261,12 +271,25 @@ class _LoginViewState extends State<LoginView> {
                       child: Column(
                         children: [
                           usuarioT(),
-                          const SizedBox(height: 30,),
+                          const Gap(30),
                           passwordT(),
-                          const SizedBox(height: 10,),
+                          const Gap(10),
                           olvidastePassword(),
-                          SizedBox(height: height * 0.04,),
+                          Gap(height * 0.03),
                           botonIngresar(),
+                          const Gap(20),
+                          InkWell(
+                            onTap: metodoLanzarRegistro,
+                            child: const Text(
+                              '¿No tienes cuenta?',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                decoration: TextDecoration.underline
+                              ),
+                            ),
+                          ),
                         ],
                       ),
                     )
@@ -353,10 +376,16 @@ class _LoginViewState extends State<LoginView> {
       onPressed: (){
         if (_formKey.currentState!.validate()) {
           cambioEstado();
-          if(usuario == 'admin' && password == 'admin'){
-            Navigator.of(context).push(
+          if(usuario.trim() == 'admin' && password.trim() == 'admin'){
+            Navigator.of(context).pushReplacement(
               MaterialPageRoute(
                 builder: (context) => const MenuView(),
+              )
+            );
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(
+                content: Text('Bienvenido'),
+                backgroundColor: Colors.green,
               )
             );
           }
@@ -373,7 +402,7 @@ class _LoginViewState extends State<LoginView> {
       style: ElevatedButton.styleFrom(
         backgroundColor: Palette.advBlue,
         foregroundColor: Colors.white,
-        padding: const EdgeInsets.symmetric(horizontal: 50, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
           side: const BorderSide(

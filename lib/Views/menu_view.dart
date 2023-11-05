@@ -1,4 +1,5 @@
 import 'package:adventurista/Constants/colors.dart';
+import 'package:adventurista/Views/perfil_view.dart';
 import 'package:adventurista/Views/principal_view.dart';
 import 'package:flutter/material.dart';
 
@@ -24,24 +25,21 @@ class _MenuViewState extends State<MenuView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Menu'),
-      ),
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children:  [
-          const PrincipalView(),
-          Container(
-            color: Colors.blue,
-          ),
-          Container(
-            color: Colors.green,
-          ),
-          Container(
-            color: Colors.yellow,
-          ),
-        ]
+      body: SizedBox.expand(
+        child: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children:  [
+            const PrincipalView(),
+            Container(
+              color: Colors.blue,
+            ),
+            Container(
+              color: Colors.green,
+            ),
+            const PerfilView(),
+          ]
+        ),
       ),
       bottomNavigationBar: BottomNavigationBar(
         selectedItemColor: Colors.grey,

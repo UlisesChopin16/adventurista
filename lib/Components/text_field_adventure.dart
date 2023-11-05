@@ -36,7 +36,7 @@ class TextFieldAdventure extends StatelessWidget {
     return const TextStyle(
       color: Colors.white,
       fontWeight: FontWeight.bold,
-      fontSize: 22,
+      fontSize: 18,
     );
   }
 
@@ -54,6 +54,14 @@ class TextFieldAdventure extends StatelessWidget {
       obscureText: obscureText ?? false,
       cursorColor: Colors.white,
       decoration: InputDecoration(
+        floatingLabelStyle: const TextStyle(
+          color: Colors.white,
+          fontSize: 15,
+          fontWeight: FontWeight.bold
+        ),
+        constraints: const BoxConstraints(
+          maxHeight: 70,
+        ),
         labelText: labelText,
         labelStyle: estiloLabelText(),
         focusedBorder: estiloUnderLine(),
