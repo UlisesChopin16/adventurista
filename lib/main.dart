@@ -1,5 +1,6 @@
 import 'package:adventurista/Constants/colors.dart';
-import 'package:adventurista/Views/login_view.dart';
+import 'package:adventurista/Views/ingreso/login_view.dart';
+import 'package:adventurista/Views/ingreso/registro_view.dart';
 import 'package:adventurista/Views/menu_view.dart';
 import 'package:adventurista/Views/principal_view.dart';
 import 'package:flutter/material.dart';
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Palette.advBlue,
       ),
       // home: const LoginView(),
+      // home: const RegistroView(),
       home: const MenuView(),
       // home: const PrincipalView(),
     );
